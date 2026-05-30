@@ -1,5 +1,5 @@
 -- ============================================================
--- test_vistas.sql
+-- test_indices.sql
 -- Casos de prueba para las vistas e índices del sistema de restaurante
 -- Proyecto Final BD - Grupo 01
 -- PostgreSQL
@@ -9,7 +9,7 @@
 --                      02_secuencias.sql,
 --                      03_triggers.sql,
 --                      04_funcion_folio.sql,
---			05_funciones_consulta,
+--			            05_funciones_consulta,
 --                      06_vistas.sql,
 --                      07_indices.sql
 -- Este script es INDEPENDIENTE, no necesita ejecutar ningun
