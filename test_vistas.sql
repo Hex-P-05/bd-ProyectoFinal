@@ -1,6 +1,6 @@
 -- ============================================================
 -- test_vistas.sql
--- Casos de prueba para las vistas e índices del sistema de restaurante
+-- Casos de prueba para los índices del sistema de restaurante
 -- Proyecto Final BD - Grupo 01
 -- PostgreSQL
 -- ============================================================
@@ -15,11 +15,8 @@
 -- otro archivo de pruebas previo.
 -- ============================================================
 
-
--- ------------------------------------------------------------
 -- LIMPIEZA PREVIA
--- Borra datos anteriores para que el script sea re-ejecutable
--- ------------------------------------------------------------
+
 DELETE FROM DETALLE_ORDEN;
 DELETE FROM ORDEN;
 DELETE FROM CLIENTE_FACT;
@@ -37,7 +34,7 @@ ALTER SEQUENCE producto_id_seq  RESTART WITH 1;
 
 
 -- ------------------------------------------------------------
--- DATOS BASE
+-- DATOS BASE (Temporales)
 -- ------------------------------------------------------------
 
 -- Categoria
