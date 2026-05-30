@@ -7,18 +7,16 @@
 -- ============================================================
 
 
+
 -- Función que recibe el número de empleado, verifica si es mesero y si sí lo es, 
 -- cuenta las órdenes de su día y suma el dinero
 CREATE OR REPLACE FUNCTION ordenes_mesero_hoy(p_num_empleado VARCHAR(10))
 RETURNS TABLE (cantidad_ordenes BIGINT, total_cobrado NUMERIC) AS $$
 DECLARE
-    -- Declaramos una variable para guardar si el empleado es mesero o no
+    -- Bandera para validar si el empleado es mesero o no
     v_es_mesero BOOLEAN;
 BEGIN
-    -- Validamos si existe en la tabla de meseros
-    -- Nota: Asumo que Carlos creó una tabla hija llamada 'mesero' por la herencia. 
-    -- Si le puso otro nombre en su DDL (como 'meseros' o lo manejó con un atributo 'rol' en la tabla empleado), 
-    -- solo cambia el nombre de la tabla aquí en el FROM.
+    -- Validamos en la tabla 'mesero' que el empleado realmente tenga este puesto
     SELECT EXISTS(SELECT 1 FROM mesero WHERE num_empleado = p_num_empleado) INTO v_es_mesero;
 
     -- Si no es mesero, lanzamos el error tal como pide el requerimiento
@@ -26,12 +24,11 @@ BEGIN
         RAISE EXCEPTION 'Error: El empleado con número % no es un mesero válido.', p_num_empleado;
     END IF;
 
-    -- Si pasa la validación, hacemos la consulta.
-    -- RETURN QUERY hace que la función devuelva directamente el resultado de este SELECT.
+    -- Ejecuta la consulta y retorna los datos obtenidos
     RETURN QUERY
     SELECT 
         COUNT(folio)::BIGINT, 
-        -- Usamos COALESCE por si el mesero no ha vendido nada hoy, para que devuelva 0 en vez de NULL, así se evita resultados en blanco
+        -- Usamos COALESCE por si el mesero no ha vendido nada hoy, para que devuelva 0 en vez de NULL
         COALESCE(SUM(total), 0)::NUMERIC 
     FROM orden
     WHERE num_empleado = p_num_empleado 
