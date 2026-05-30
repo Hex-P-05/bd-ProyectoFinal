@@ -27,12 +27,6 @@ CREATE INDEX idx_Orden_num_empleado ON ORDEN(num_empleado);
 -- sin recorrer toda la tabla.
 CREATE INDEX idx_orden_fecha ON ORDEN (fecha);
 
--- Creo que asi son las pruebas, bueno cuando tengamos datos se deben hacer y checar que vaya mas rapido
--- SELECT producto_id FROM DETALLE_ORDEN
--- SELECT rfc FROM ORDEN
--- SELECT num_empleado FROM ORDEN
--- SELECT fecha FROM ORDEN 
-
 
 
 
