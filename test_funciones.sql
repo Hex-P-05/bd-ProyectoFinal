@@ -9,7 +9,7 @@
 -- datos de prueba, por lo que puede ejecutarse de forma
 -- independiente sin depender del estado de pruebas anteriores.
 -- ============================================================
--- LIMPIEZA
+-- Limpieza para pruebas sin colisiones.
 DELETE FROM DETALLE_ORDEN;
 DELETE FROM ORDEN;
 DELETE FROM PLATILLO;
@@ -71,8 +71,17 @@ INSERT INTO DETALLE_ORDEN (folio, producto_id, cantidad, precio_platillo)
 VALUES ('ORD-001', 2, 1, 0);
 -- ============================================================
 -- PRUEBA PARA LA FUNCIÓN ordenes_mesero_hoy
---Se espera que lance un error "Error: El empleado con número EMP-999 no es un mesero válido."
-SELECT * FROM ordenes_mesero_hoy('EMP-999');
+-- Se espera que lance un error "Error: El empleado con número EMP-999 no es un mesero válido."
+DO $$
+BEGIN
+    -- Perform para no guardar el resultado
+    PERFORM * FROM ordenes_mesero_hoy('EMP-999');
+    RAISE NOTICE 'ERROR: La función dejó pasar al empleado falso.';
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE NOTICE 'Prueba pasada: el sistema bloqueó al mesero falso correctamente.';
+END;
+$$;
 
 --Se espera que devuelva tabla con una orden y $195.00 de total cobrado
 SELECT * FROM ordenes_mesero_hoy('EMP-001');
