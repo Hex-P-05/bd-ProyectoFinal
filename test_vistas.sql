@@ -1,6 +1,6 @@
 -- ============================================================
 -- test_vistas.sql
--- Casos de prueba para los índices del sistema de restaurante
+-- Casos de prueba para las vistas del sistema de restaurante
 -- Proyecto Final BD - Grupo 01
 -- PostgreSQL
 -- ============================================================
